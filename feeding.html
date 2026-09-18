@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feeding Guide — The Waggle Hut</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .faq-item { border-bottom: 1px solid var(--line); padding: 20px 0; }
+    .faq-question { font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { display: none; padding-top: 10px; color: rgba(36,32,27,0.7); line-height: 1.6; }
+    .faq-item.active .faq-answer { display: block; }
+    .content-section { margin-bottom: 40px; }
+    .disclaimer { background: var(--cream-2); padding: 20px; border-radius: 6px; border: 1.5px solid var(--ink); margin: 30px 0; }
+  </style>
+</head>
+<body>
+
+<div class="cart-overlay">
+  <div class="cart-drawer">
+    <div class="cart-header" style="display:flex; justify-content:space-between; align-items:center;">
+      <h2 id="cart-total-items">0 items</h2>
+      <button class="close-cart" onclick="closeCart()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-items">
+      <!-- Items injected via JS -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Subtotal</span>
+        <span>£0.00</span>
+      </div>
+      <button class="cta-btn checkout-btn" onclick="window.location.assign('checkout.html')">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 9.5c0 1.4-1 2.5-2.2 2.5S3.5 10.9 3.5 9.5 4.6 7 5.8 7 8 8.1 8 9.5Z" fill="#F3ECDC"/><path d="M12.5 6.5c0 1.4-1 2.5-2.2 2.5S8 7.9 8 6.5 9 4 10.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M17.5 6.5c0 1.4-1 2.5-2.3 2.5s-2.2-1.1-2.2-2.5S14.9 4 16.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M20.5 9.5c0 1.4-1 2.5-2.2 2.5S16 10.9 16 9.5 17.1 7 18.3 7s2.2 1.1 2.2 2.5Z" fill="#F3ECDC"/><path d="M12 12c-2.6 0-5.3 1.7-5.3 4.1 0 1.5 1.2 2.6 2.6 2.3.9-.2 1.7-.6 2.7-.6s1.8.4 2.7.6c1.4.3 2.6-.8 2.6-2.3 0-2.4-2.7-4.1-5.3-4.1Z" fill="#F3ECDC"/></svg></span>
+      The Waggle Hut
+    </a>
+    <nav>
+      <div class="nav-links">
+        <a href="shop.html">Shop</a>
+        <a href="feeding.html">Feeding Guide</a>
+        <a href="calculator.html">Feeding Calculator</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="cart-trigger" onclick="openCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-count">0</span>
+      </button>
+      <a href="shop.html" class="cta-btn outline">Shop All</a>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding: 60px 32px;">
+  <h1>Feeding Guide</h1>
+  
+  <section class="content-section">
+    <h2>Understanding Raw Feeding</h2>
+    <p>Raw feeding is a diet for dogs based on raw meat, bones, and organs. People choose it to mimic a more ancestral, natural diet.</p>
+    <p><strong>Complete vs Complementary:</strong> A complete meal contains all necessary nutrients. Complementary products (like pure tripe or boneless meats) are meant to be part of a wider, balanced diet.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>Raw Food Compositions</h2>
+    <ul>
+      <li><strong>25% Bone:</strong> Often used as a robust foundational component, offering significant calcium. (e.g., <a href="shop.html?cat=raw">Chicken (25% Bone)</a>)</li>
+      <li><strong>80/10/10 Complete:</strong> A widely used model: 80% muscle meat, 10% bone, 10% organ. Ensure "complete" is specifically formulated. (e.g., <a href="shop.html?cat=raw">Chicken Complete (80/10/10)</a>)</li>
+      <li><strong>10% Bone:</strong> A milder bone percentage. (e.g., <a href="shop.html?cat=raw">Beef (10% Bone)</a>)</li>
+      <li><strong>Boneless:</strong> Used to adjust ratios or add variety. (e.g., <a href="shop.html?cat=raw">Tripe (Boneless)</a>)</li>
+    </ul>
+  </section>
+
+  <section class="content-section">
+    <h2>Safe Handling & Storage</h2>
+    <p>Always keep raw food frozen. Thaw in the fridge, never at room temperature. Wash hands and surfaces thoroughly after handling. Keep raw food separate from human food.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>Feeding Amounts</h2>
+    <p>Amounts depend on age, weight, activity, and breed. Our calculator provides a starting estimate.</p>
+    <a href="calculator.html" class="cta-btn">Use Feeding Calculator</a>
+  </section>
+
+  <div class="disclaimer">
+    <em>Disclaimer: This feeding information is general guidance. Every dog has different nutritional requirements based on age, breed, weight, and activity level. Please consult with a qualified veterinary professional or canine nutritionist to ensure your dog's specific needs are met.</em>
+  </div>
+
+  <h2>FAQ</h2>
+  <div id="faq-container">
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What is raw feeding?</div><div class="faq-answer">Raw feeding involves feeding uncooked meat, bones, and organs to simulate ancestral diets.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What does complete raw food mean?</div><div class="faq-answer">"Complete" means the product is formulated to contain all necessary daily nutrients for the dog.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What is 80/10/10?</div><div class="faq-answer">It is a ratio: 80% muscle meat, 10% bone, and 10% organs.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What does 25% bone mean?</div><div class="faq-answer">This indicates the product's bone content, helping you manage the total bone ratio in your dog's diet.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Why does raw food contain bone?</div><div class="faq-answer">Bone provides essential calcium and phosphorus required for a balanced diet.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What is boneless raw food?</div><div class="faq-answer">Food without bone, often used to balance out higher bone meals or as a tasty supplement.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What is tripe?</div><div class="faq-answer">Tripe is the stomach lining of ruminant animals, highly palatable and rich in enzymes.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What is oily fish?</div><div class="faq-answer">Fish like salmon or sardines, great for Omega-3s.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">How do I introduce raw food?</div><div class="faq-answer">Slowly! Start by replacing one meal or protein at a time and watch your dog's stools.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">How quickly should I introduce a new protein?</div><div class="faq-answer">Gradually, over several days, to monitor for any digestive upsets.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Should I rotate proteins?</div><div class="faq-answer">Yes, rotating proteins ensures a wider range of amino acids and nutrients.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Can puppies eat raw food?</div><div class="faq-answer">Yes, but they require a diet specifically balanced for rapid growth.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Can older dogs eat raw food?</div><div class="faq-answer">Yes, many older dogs enjoy and benefit from raw food.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">What if stools become loose?</div><div class="faq-answer">This can happen with change. Slow down the introduction, or add a bit more bone.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="this.parentElement.classList.toggle('active')">How should raw food be stored?</div><div class="faq-answer">Always keep frozen until needed, then thaw in the fridge.</div></div>
+  </div>
+</main>
+
+<script src="js/cart.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

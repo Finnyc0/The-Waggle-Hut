@@ -49,28 +49,37 @@ function renderCart() {
   const container = document.querySelector('.cart-items');
   if (!container) return;
 
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const totalCost = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
   if (cart.length === 0) {
     container.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
     document.querySelector('.cart-total span:last-child').textContent = '£0.00';
+    document.getElementById('cart-total-items').textContent = '0 items';
     return;
   }
 
   container.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <div class="cart-item-info">
-        <h4>${item.name}</h4>
-        <p>£${item.price.toFixed(2)} x ${item.quantity}</p>
-        <div style="display:flex; gap:10px; margin-top:8px;">
-           <button onclick="updateQuantity('${item.id}', -1)" style="cursor:pointer; background:none; border:1px solid var(--ink); width:24px; height:24px;">-</button>
-           <button onclick="updateQuantity('${item.id}', 1)" style="cursor:pointer; background:none; border:1px solid var(--ink); width:24px; height:24px;">+</button>
-           <button onclick="removeFromCart('${item.id}')" style="cursor:pointer; background:none; border:none; color:var(--rust); font-size:11px; margin-left:auto; font-family:'IBM Plex Mono', monospace;">REMOVE</button>
+    <div class="cart-item" style="display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line);">
+      <img src="${item.image}" alt="${item.name}" style="width: 64px; height: 64px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line);">
+      <div style="flex-grow: 1;">
+        <h4 style="margin: 0 0 4px; font-size: 15px;">${item.name}</h4>
+        <p style="margin: 0; font-size: 13px; color: rgba(36,32,27,0.6);">£${item.price.toFixed(2)} each</p>
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 8px;">
+          <div style="display: flex; align-items: center; border: 1px solid var(--ink); border-radius: 4px;">
+            <button onclick="updateQuantity('${item.id}', -1)" style="border: none; background: none; padding: 4px 10px; cursor: pointer; font-size: 16px;">-</button>
+            <span style="font-weight: 600; min-width: 24px; text-align: center;">${item.quantity}</span>
+            <button onclick="updateQuantity('${item.id}', 1)" style="border: none; background: none; padding: 4px 10px; cursor: pointer; font-size: 16px;">+</button>
+          </div>
+          <button onclick="removeFromCart('${item.id}')" style="border: none; background: none; color: var(--rust); font-size: 12px; cursor: pointer; text-decoration: underline;">Remove</button>
         </div>
       </div>
+      <div style="font-weight: 700; align-self: center;">£${(item.price * item.quantity).toFixed(2)}</div>
     </div>
   `).join('');
 
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  document.querySelector('.cart-total span:last-child').textContent = `£${total.toFixed(2)}`;
+  document.getElementById('cart-total-items').textContent = `${totalItems} item${totalItems === 1 ? '' : 's'}`;
+  document.querySelector('.cart-total span:last-child').textContent = `£${totalCost.toFixed(2)}`;
 }
 
 function updateCartBadge() {

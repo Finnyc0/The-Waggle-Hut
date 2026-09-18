@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — The Waggle Hut</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 9.5c0 1.4-1 2.5-2.2 2.5S3.5 10.9 3.5 9.5 4.6 7 5.8 7 8 8.1 8 9.5Z" fill="#F3ECDC"/><path d="M12.5 6.5c0 1.4-1 2.5-2.2 2.5S8 7.9 8 6.5 9 4 10.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M17.5 6.5c0 1.4-1 2.5-2.3 2.5s-2.2-1.1-2.2-2.5S14.9 4 16.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M20.5 9.5c0 1.4-1 2.5-2.2 2.5S16 10.9 16 9.5 17.1 7 18.3 7s2.2 1.1 2.2 2.5Z" fill="#F3ECDC"/><path d="M12 12c-2.6 0-5.3 1.7-5.3 4.1 0 1.5 1.2 2.6 2.6 2.3.9-.2 1.7-.6 2.7-.6s1.8.4 2.7.6c1.4.3 2.6-.8 2.6-2.3 0-2.4-2.7-4.1-5.3-4.1Z" fill="#F3ECDC"/></svg></span>
+      The Waggle Hut
+    </a>
+  </div>
+</header>
+
+<main class="wrap" style="padding: 60px 32px;">
+  <h1>Checkout</h1>
+  <div style="background: var(--cream-2); padding: 20px; border-radius: 6px; border: 1.5px solid var(--ink); margin-bottom: 40px;">
+    <strong>Note:</strong> This is a demonstration placeholder and does not process real payments.
+  </div>
+  
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;">
+    <form onsubmit="event.preventDefault(); alert('Order placed! (Demo Only)'); window.location.href='index.html';">
+      <h2>Customer Information</h2>
+      <input type="text" placeholder="Full Name" required style="width:100%; padding:12px; margin-bottom:10px; border:1px solid var(--ink);">
+      <input type="email" placeholder="Email" required style="width:100%; padding:12px; margin-bottom:10px; border:1px solid var(--ink);">
+      <h2>Delivery Address</h2>
+      <input type="text" placeholder="Address" required style="width:100%; padding:12px; margin-bottom:10px; border:1px solid var(--ink);">
+      <input type="text" placeholder="Postcode" required style="width:100%; padding:12px; margin-bottom:20px; border:1px solid var(--ink);">
+      
+      <h3>Payment (Demo Only)</h3>
+      <div style="border: 1px solid var(--ink); padding: 20px;">
+        <p>This is a simulated payment gateway. No real card details are required.</p>
+      </div>
+      <button type="submit" class="cta-btn" style="width:100%; margin-top:20px;">Place Order</button>
+    </form>
+    
+    <div style="background: var(--cream); padding: 30px; border: 1px solid var(--ink);">
+      <h2>Order Summary</h2>
+      <div id="checkout-summary"></div>
+      <hr>
+      <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2em;">
+        <span>Total</span>
+        <span id="checkout-total">£0.00</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/products.js"></script>
+<script>
+  const cart = JSON.parse(localStorage.getItem('waggleCart')) || [];
+  const summary = document.getElementById('checkout-summary');
+  const totalDisplay = document.getElementById('checkout-total');
+  
+  let totalCost = 0;
+  summary.innerHTML = cart.map(item => {
+    totalCost += item.price * item.quantity;
+    return `<div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <span>${item.quantity} x ${item.name}</span>
+              <span>£${(item.price * item.quantity).toFixed(2)}</span>
+            </div>`;
+  }).join('');
+  
+  totalDisplay.textContent = '£' + totalCost.toFixed(2);
+</script>
+</body>
+</html>
+
+
+
