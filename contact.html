@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Support — The Waggle Hut</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<div class="cart-overlay">
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="close-cart" onclick="closeCart()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Subtotal</span><span>£0.00</span></div>
+      <button class="cta-btn checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 9.5c0 1.4-1 2.5-2.2 2.5S3.5 10.9 3.5 9.5 4.6 7 5.8 7 8 8.1 8 9.5Z" fill="#F3ECDC"/><path d="M12.5 6.5c0 1.4-1 2.5-2.2 2.5S8 7.9 8 6.5 9 4 10.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M17.5 6.5c0 1.4-1 2.5-2.3 2.5s-2.2-1.1-2.2-2.5S14.9 4 16.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M20.5 9.5c0 1.4-1 2.5-2.2 2.5S16 10.9 16 9.5 17.1 7 18.3 7s2.2 1.1 2.2 2.5Z" fill="#F3ECDC"/><path d="M12 12c-2.6 0-5.3 1.7-5.3 4.1 0 1.5 1.2 2.6 2.6 2.3.9-.2 1.7-.6 2.7-.6s1.8.4 2.7.6c1.4.3 2.6-.8 2.6-2.3 0-2.4-2.7-4.1-5.3-4.1Z" fill="#F3ECDC"/>
+        </svg>
+      </span>
+      The Waggle Hut
+    </a>
+    <nav>
+      <div class="nav-links">
+        <a href="shop.html?cat=raw">Raw Food</a>
+        <a href="shop.html?cat=treats">Treats</a>
+        <a href="calculator.html">Feeding Guide</a>
+        <a href="contact.html" style="border-color:var(--rust);">Support</a>
+        <a href="shop.html" class="mobile-only-link">Shop All</a>
+      </div>
+      <button class="cart-trigger" onclick="openCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-count">0</span>
+      </button>
+      <a href="shop.html" class="cta-btn outline">Shop All</a>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding: 60px 32px;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+    <div>
+      <div class="eyebrow" style="color: var(--rust); margin-bottom: 12px;">Get in touch</div>
+      <h1 style="font-size: 48px; margin-bottom: 24px;">How can we help?</h1>
+      <p style="font-size: 17px; line-height: 1.6; color: rgba(36, 32, 27, 0.7); margin-bottom: 40px;">
+        Whether you're looking for a specific treat or have a question about raw feeding, our team is here to help you and your pet.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 32px;">
+        <div>
+          <h4 style="margin-bottom: 8px;">Shipping & Delivery</h4>
+          <p style="font-size: 14px; line-height: 1.5; color: rgba(36, 32, 27, 0.7);">
+            Raw food orders are shipped in insulated eco-friendly packaging via 24h courier. We ship Tuesday through Thursday to ensure freshness.
+          </p>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 8px;">Contact Details</h4>
+          <p style="font-size: 14px; line-height: 1.5; color: rgba(36, 32, 27, 0.7);">
+            Email: hello@wagglehut.co.uk<br>
+            Phone: 01234 567 890<br>
+            Hours: Mon-Fri, 9am - 5pm
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: white; border: 2px solid var(--ink); border-radius: 8px; padding: 40px; box-shadow: 6px 6px 0 var(--ink);">
+      <form onsubmit="event.preventDefault(); alert('Message sent! We\'ll get back to you soon.'); this.reset();">
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px;">Name</label>
+          <input type="text" required style="width: 100%; padding: 12px; border: 1.5px solid var(--ink); border-radius: 4px; font-family: inherit;">
+        </div>
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px;">Email Address</label>
+          <input type="email" required style="width: 100%; padding: 12px; border: 1.5px solid var(--ink); border-radius: 4px; font-family: inherit;">
+        </div>
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px;">Message</label>
+          <textarea rows="5" required style="width: 100%; padding: 12px; border: 1.5px solid var(--ink); border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+        <button type="submit" class="cta-btn" style="width: 100%; padding: 18px;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer style="margin-top: 100px;">
+  <div class="foot-inner">
+    <div class="foot-col" style="max-width:260px;">
+      <div class="logo" style="margin-bottom:10px;">
+        <span class="mark" style="width:28px;height:28px;">
+           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;"><path d="M8 9.5c0 1.4-1 2.5-2.2 2.5S3.5 10.9 3.5 9.5 4.6 7 5.8 7 8 8.1 8 9.5Z" fill="#F3ECDC"/><path d="M12.5 6.5c0 1.4-1 2.5-2.2 2.5S8 7.9 8 6.5 9 4 10.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M17.5 6.5c0 1.4-1 2.5-2.3 2.5s-2.2-1.1-2.2-2.5S14.9 4 16.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M20.5 9.5c0 1.4-1 2.5-2.2 2.5S16 10.9 16 9.5 17.1 7 18.3 7s2.2 1.1 2.2 2.5Z" fill="#F3ECDC"/><path d="M12 12c-2.6 0-5.3 1.7-5.3 4.1 0 1.5 1.2 2.6 2.6 2.3.9-.2 1.7-.6 2.7-.6s1.8.4 2.7.6c1.4.3 2.6-.8 2.6-2.3 0-2.4-2.7-4.1-5.3-4.1Z" fill="#F3ECDC"/></svg>
+        </span>
+        <span style="font-size:17px;">The Waggle Hut</span>
+      </div>
+      <p style="font-size:13.5px; line-height:1.6; color:rgba(36,32,27,0.65);">Real food and real care for the animals in your life, shipped straight to your door.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <a href="shop.html?cat=raw">Raw Food</a>
+      <a href="shop.html?cat=treats">Natural Treats</a>
+      <a href="shop.html?cat=small-animals">Small Animals</a>
+      <a href="shop.html?cat=misc">Miscellaneous</a>
+    </div>
+    <div class="foot-col">
+      <h4>Support</h4>
+      <a href="contact.html">Shipping &amp; Returns</a>
+      <a href="calculator.html">Feeding Guides</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="foot-col">
+      <h4>Follow</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 The Waggle Hut. All rights reserved.</span>
+    <span>Made for pets who deserve better.</span>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+
+</body>
+</html>

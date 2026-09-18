@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raw Feeding Calculator — The Waggle Hut</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<div class="cart-overlay">
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="close-cart" onclick="closeCart()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Subtotal</span><span>£0.00</span></div>
+      <button class="cta-btn checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 9.5c0 1.4-1 2.5-2.2 2.5S3.5 10.9 3.5 9.5 4.6 7 5.8 7 8 8.1 8 9.5Z" fill="#F3ECDC"/>
+          <path d="M12.5 6.5c0 1.4-1 2.5-2.2 2.5S8 7.9 8 6.5 9 4 10.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/>
+          <path d="M17.5 6.5c0 1.4-1 2.5-2.3 2.5s-2.2-1.1-2.2-2.5S14.9 4 16.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/>
+          <path d="M20.5 9.5c0 1.4-1 2.5-2.2 2.5S16 10.9 16 9.5 17.1 7 18.3 7s2.2 1.1 2.2 2.5Z" fill="#F3ECDC"/>
+          <path d="M12 12c-2.6 0-5.3 1.7-5.3 4.1 0 1.5 1.2 2.6 2.6 2.3.9-.2 1.7-.6 2.7-.6s1.8.4 2.7.6c1.4.3 2.6-.8 2.6-2.3 0-2.4-2.7-4.1-5.3-4.1Z" fill="#F3ECDC"/>
+        </svg>
+      </span>
+      The Waggle Hut
+    </a>
+    <nav>
+      <div class="nav-links">
+        <a href="shop.html?cat=raw">Raw Food</a>
+        <a href="shop.html?cat=treats">Treats</a>
+        <a href="calculator.html" style="border-color:var(--rust);">Feeding Guide</a>
+        <a href="contact.html">Support</a>
+        <a href="shop.html" class="mobile-only-link">Shop All</a>
+      </div>
+      <button class="cart-trigger" onclick="openCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-count">0</span>
+      </button>
+      <a href="shop.html" class="cta-btn outline">Shop All</a>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding: 60px 32px;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <div class="eyebrow" style="color: var(--sage); margin-bottom: 12px;">Portion Planner</div>
+    <h1 style="font-size: 48px; margin-bottom: 24px;">Raw Feeding Calculator</h1>
+    <p style="font-size: 18px; line-height: 1.6; color: rgba(36, 32, 27, 0.7); margin-bottom: 40px;">
+      Switching to raw shouldn't be guesswork. Use our calculator to find the perfect daily amount for your dog based on their weight and life stage.
+    </p>
+
+    <div style="background: white; border: 2px solid var(--ink); border-radius: 8px; padding: 40px; box-shadow: 6px 6px 0 var(--ink);">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+        <div>
+          <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px;">Dog's Weight (kg)</label>
+          <input type="number" id="weight" placeholder="e.g. 20" style="width: 100%; padding: 12px; border: 1.5px solid var(--ink); border-radius: 4px; font-family: inherit; font-size: 16px;">
+        </div>
+        <div>
+          <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px;">Activity Level</label>
+          <select id="activity" style="width: 100%; padding: 12px; border: 1.5px solid var(--ink); border-radius: 4px; font-family: inherit; font-size: 16px; background: white;">
+            <option value="0.02">Inactive / Senior (2%)</option>
+            <option value="0.025" selected>Average Adult (2.5%)</option>
+            <option value="0.03">Very Active (3%)</option>
+            <option value="0.05">Puppy (5%)</option>
+          </select>
+        </div>
+      </div>
+      
+      <button class="cta-btn" style="width: 100%; padding: 18px; font-size: 16px;" onclick="calculatePortion()">Calculate Daily Portion</button>
+
+      <div id="result" style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line); display: none; text-align: center;">
+        <div class="eyebrow" style="color: var(--rust); margin-bottom: 8px;">Recommended Daily Amount</div>
+        <div style="font-family: 'Fraunces', serif; font-size: 64px; font-weight: 900; color: var(--pine);" id="portion-value">500g</div>
+        <p style="font-size: 14px; color: rgba(36, 32, 27, 0.6); margin-top: 10px;">Split this into 2 meals per day.</p>
+        
+        <div style="margin-top: 32px; background: var(--cream); padding: 20px; border-radius: 6px; text-align: left;">
+          <h4 style="margin-bottom: 10px;">The 80-10-10 Rule</h4>
+          <p style="font-size: 14px; line-height: 1.5;">For a balanced diet, this total should ideally consist of 80% muscle meat, 10% edible bone, and 10% organ meat (5% of which should be liver).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer style="margin-top: 100px;">
+  <div class="foot-inner">
+    <div class="foot-col" style="max-width:260px;">
+      <div class="logo" style="margin-bottom:10px;">
+        <span class="mark" style="width:28px;height:28px;">
+           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;"><path d="M8 9.5c0 1.4-1 2.5-2.2 2.5S3.5 10.9 3.5 9.5 4.6 7 5.8 7 8 8.1 8 9.5Z" fill="#F3ECDC"/><path d="M12.5 6.5c0 1.4-1 2.5-2.2 2.5S8 7.9 8 6.5 9 4 10.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M17.5 6.5c0 1.4-1 2.5-2.3 2.5s-2.2-1.1-2.2-2.5S14.9 4 16.2 4s2.3 1.1 2.3 2.5Z" fill="#F3ECDC"/><path d="M20.5 9.5c0 1.4-1 2.5-2.2 2.5S16 10.9 16 9.5 17.1 7 18.3 7s2.2 1.1 2.2 2.5Z" fill="#F3ECDC"/><path d="M12 12c-2.6 0-5.3 1.7-5.3 4.1 0 1.5 1.2 2.6 2.6 2.3.9-.2 1.7-.6 2.7-.6s1.8.4 2.7.6c1.4.3 2.6-.8 2.6-2.3 0-2.4-2.7-4.1-5.3-4.1Z" fill="#F3ECDC"/></svg>
+        </span>
+        <span style="font-size:17px;">The Waggle Hut</span>
+      </div>
+      <p style="font-size:13.5px; line-height:1.6; color:rgba(36,32,27,0.65);">Real food and real care for the animals in your life, shipped straight to your door.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <a href="shop.html?cat=raw">Raw Food</a>
+      <a href="shop.html?cat=treats">Natural Treats</a>
+      <a href="shop.html?cat=small-animals">Small Animals</a>
+      <a href="shop.html?cat=misc">Miscellaneous</a>
+    </div>
+    <div class="foot-col">
+      <h4>Support</h4>
+      <a href="contact.html">Shipping &amp; Returns</a>
+      <a href="calculator.html">Feeding Guides</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="foot-col">
+      <h4>Follow</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 The Waggle Hut. All rights reserved.</span>
+    <span>Made for pets who deserve better.</span>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  function calculatePortion() {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const activity = parseFloat(document.getElementById('activity').value);
+    const resultDiv = document.getElementById('result');
+    const valueSpan = document.getElementById('portion-value');
+
+    if (isNaN(weight) || weight <= 0) {
+      alert("Please enter a valid weight.");
+      return;
+    }
+
+    const portion = weight * activity * 1000; // in grams
+    valueSpan.textContent = portion >= 1000 ? (portion/1000).toFixed(2) + 'kg' : Math.round(portion) + 'g';
+    resultDiv.style.display = 'block';
+    
+    // Smooth scroll to result
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+
+</body>
+</html>
