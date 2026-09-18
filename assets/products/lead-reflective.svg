@@ -1,0 +1,16 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#F5F7F6"/>
+  <rect x="12" y="12" width="376" height="276" fill="none" stroke="#1F3A2E" stroke-width="1.5" stroke-dasharray="6 4" rx="4"/>
+  <g transform="translate(176, 45) scale(2)">
+    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-5h2v2h-2v-2zm1-8.5a3.25 3.25 0 0 1 3.25 3.25c0 1.2-.66 2.05-1.5 2.7-.84.65-1.75 1.15-1.75 2.55h-2c0-2.2 1.3-3.05 2.1-3.65.8-.6 1.15-1.05 1.15-1.6A1.25 1.25 0 1 0 11 11.25H9A3.25 3.25 0 0 1 12 6.5z" fill="#1F3A2E" fill-opacity="0.15" stroke="#1F3A2E" stroke-width="0.5"/>
+  </g>
+  <text x="50%" y="160" font-family="'Work Sans', sans-serif" font-size="18" font-weight="600" fill="#24201B" text-anchor="middle" letter-spacing="-0.02em">
+    <tspan x="50%" dy="0">Reflective Lead</tspan>
+  </text>
+  <g transform="translate(140, 240)">
+    <rect width="120" height="22" rx="11" fill="#1F3A2E" fill-opacity="0.1"/>
+    <text x="60" y="14" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="600" fill="#1F3A2E" text-anchor="middle" letter-spacing="0.1em">
+      MISC
+    </text>
+  </g>
+</svg>

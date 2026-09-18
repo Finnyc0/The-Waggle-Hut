@@ -68,21 +68,75 @@
   </div>
 </header>
 
+<div class="filter-drawer-overlay" id="filter-overlay" onclick="toggleFilterDrawer()"></div>
+
 <main class="wrap" style="padding: 60px 32px;">
   <div style="margin-bottom: 48px;">
     <div class="eyebrow" style="color: var(--rust); margin-bottom: 12px;">The Pantry</div>
     <h1 style="font-size: 48px; margin-bottom: 16px;">Shop Our Staples</h1>
-    <div style="display: flex; gap: 12px; flex-wrap: wrap;" id="filters">
-      <button class="cta-btn" onclick="filterProducts('all')">All</button>
-      <button class="cta-btn outline" onclick="filterProducts('raw')">Raw Food</button>
-      <button class="cta-btn outline" onclick="filterProducts('treats')">Treats</button>
-      <button class="cta-btn outline" onclick="filterProducts('small-animals')">Small Animals</button>
-      <button class="cta-btn outline" onclick="filterProducts('misc')">Accessories</button>
-    </div>
+    <button class="filter-toggle-btn" onclick="toggleFilterDrawer()">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
+      Filters
+    </button>
   </div>
 
-  <div class="cat-grid" id="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
-    <!-- Products injected via JS -->
+  <div class="shop-container">
+    <aside class="shop-sidebar" id="filter-sidebar">
+      <button class="close-filters-btn" onclick="toggleFilterDrawer()">Filters <span>&times;</span></button>
+      
+      <div class="filter-group">
+        <label>Category</label>
+        <select id="cat-filter" onchange="applyFiltersAndSort()">
+          <option value="all">All Categories</option>
+          <option value="raw">Raw Food</option>
+          <option value="treats">Treats</option>
+          <option value="small-animals">Small Animals</option>
+          <option value="misc">Accessories</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Meat Type</label>
+        <select id="meat-filter" onchange="applyFiltersAndSort()">
+          <option value="all">All</option>
+          <option value="beef">Beef</option>
+          <option value="chicken">Chicken</option>
+          <option value="duck">Duck</option>
+          <option value="lamb">Lamb</option>
+          <option value="turkey">Turkey</option>
+          <option value="fish">Fish</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label>Bone %</label>
+        <select id="bone-filter" onchange="applyFiltersAndSort()">
+          <option value="all">All</option>
+          <option value="10">10%</option>
+          <option value="25">25%</option>
+          <option value="boneless">Boneless</option>
+        </select>
+      </div>
+    </aside>
+
+    <div style="flex:1;">
+      <div class="shop-control-bar">
+        <div class="results-count" id="results-count">Showing all products</div>
+        <div class="sort-container">
+          <label>Sort by</label>
+          <select id="sort-select" onchange="applyFiltersAndSort()">
+            <option value="recommended">Recommended</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Alphabetical</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cat-grid" id="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
+        <!-- Products injected via JS -->
+      </div>
+    </div>
   </div>
 </main>
 
@@ -131,13 +185,20 @@
 <script src="js/products.js"></script>
 <script src="js/cart.js"></script>
 <script>
-  function renderProducts(filter = 'all') {
+  function toggleFilterDrawer() {
+    document.getElementById('filter-sidebar').classList.toggle('open');
+    document.getElementById('filter-overlay').classList.toggle('open');
+  }
+
+  function renderProducts(items) {
     const grid = document.getElementById('product-grid');
-    const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+    document.getElementById('results-count').textContent = `Showing ${items.length} products`;
     
-    grid.innerHTML = filtered.map(p => `
+    grid.innerHTML = items.map(p => `
       <div class="cat-card ${p.category}" style="--tilt: 0deg; cursor: default;">
-        <span class="cat-tag-hole"></span>
+        <div class="product-card-img-container">
+            <img src="${p.image}" alt="${p.name}" class="product-card-img">
+        </div>
         <h3>${p.name}</h3>
         <p>${p.description}</p>
         <div style="margin-top:auto;">
@@ -148,26 +209,48 @@
     `).join('');
   }
 
-  function filterProducts(cat) {
-    // Update button styles
-    const buttons = document.querySelectorAll('#filters button');
-    buttons.forEach(btn => {
-      if (btn.textContent.toLowerCase().includes(cat.replace('-',' '))) {
-        btn.classList.remove('outline');
-      } else if (cat === 'all' && btn.textContent === 'All') {
-        btn.classList.remove('outline');
-      } else {
-        btn.classList.add('outline');
-      }
-    });
-    renderProducts(cat);
+  function applyFiltersAndSort() {
+    const cat = document.getElementById('cat-filter').value;
+    const meat = document.getElementById('meat-filter').value;
+    const bone = document.getElementById('bone-filter').value;
+    const sort = document.getElementById('sort-select').value;
+    
+    let filtered = [...products];
+
+    // Filter by Category
+    if (cat !== 'all') {
+        filtered = filtered.filter(p => p.category === cat);
+    }
+
+    // Filter by Meat Type
+    if (meat !== 'all') {
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(meat));
+    }
+
+    // Filter by Bone %
+    if (bone !== 'all') {
+        if (bone === 'boneless') {
+            filtered = filtered.filter(p => p.name.toLowerCase().includes('boneless'));
+        } else {
+            filtered = filtered.filter(p => p.name.includes(bone + '%'));
+        }
+    }
+    
+    // Apply sorting
+    if (sort === 'price-low') filtered.sort((a,b) => a.price - b.price);
+    else if (sort === 'price-high') filtered.sort((a,b) => b.price - a.price);
+    else if (sort === 'name') filtered.sort((a,b) => a.name.localeCompare(b.name));
+    
+    renderProducts(filtered);
   }
 
-  // Handle URL category
+  // Initial render
   const urlParams = new URLSearchParams(window.location.search);
   const catParam = urlParams.get('cat');
-  renderProducts(catParam || 'all');
-  if (catParam) filterProducts(catParam);
+  if (catParam) {
+      document.getElementById('cat-filter').value = catParam;
+  }
+  applyFiltersAndSort();
 </script>
 
 </body>

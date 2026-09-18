@@ -5,7 +5,7 @@ const products = [
     name: 'Raw Beef Starter Bundle',
     description: 'Perfect for beginners. Includes 10kg of premium ground beef, heart, and liver chunks.',
     price: 45.00,
-    image: 'assets/products/raw-beef.jpg'
+    image: 'assets/products/raw-beef.svg'
   },
   {
     id: 'raw-chicken-complete',
@@ -13,7 +13,7 @@ const products = [
     name: 'Chicken & Bone Complete',
     description: 'A finely ground mix of chicken meat and soft bone. High in calcium and natural fats.',
     price: 38.00,
-    image: 'assets/products/raw-chicken.jpg'
+    image: 'assets/products/raw-chicken.svg'
   },
   {
     id: 'treat-venison-ears',
@@ -21,7 +21,7 @@ const products = [
     name: 'Air-Dried Venison Ears',
     description: 'Long-lasting, single-ingredient chew. Great for dental health and sensitive stomachs.',
     price: 12.50,
-    image: 'assets/products/treat-venison.jpg'
+    image: 'assets/products/treat-venison.svg'
   },
   {
     id: 'treat-beef-liver',
@@ -29,7 +29,7 @@ const products = [
     name: 'Crunchy Beef Liver Snaps',
     description: 'Bite-sized training treats. Packed with Vitamin A and high-quality protein.',
     price: 8.00,
-    image: 'assets/products/treat-liver.jpg'
+    image: 'assets/products/treat-liver.svg'
   },
   {
     id: 'small-timothy-hay',
@@ -37,7 +37,7 @@ const products = [
     name: 'Premium Timothy Hay',
     description: 'Sun-cured, long-strand hay. Essential fiber for rabbits and guinea pigs.',
     price: 15.00,
-    image: 'assets/products/hay.jpg'
+    image: 'assets/products/hay.svg'
   },
   {
     id: 'small-herbal-mix',
@@ -45,7 +45,7 @@ const products = [
     name: 'Wild Flower Enrichment Mix',
     description: 'A blend of dried dandelion, marigold, and nettle for foraging fun.',
     price: 6.50,
-    image: 'assets/products/herbs.jpg'
+    image: 'assets/products/herbs.svg'
   },
   {
     id: 'misc-ceramic-bowl',
@@ -53,7 +53,7 @@ const products = [
     name: 'Heavyweight Ceramic Bowl',
     description: 'Non-slip, easy-clean bowl in our signature Sage green.',
     price: 18.00,
-    image: 'assets/products/bowl.jpg'
+    image: 'assets/products/bowl.svg'
   },
   {
     id: 'misc-rope-lead',
@@ -61,7 +61,375 @@ const products = [
     name: 'Braided Cotton Rope Lead',
     description: 'Durable, hand-spliced lead with solid brass hardware.',
     price: 22.00,
-    image: 'assets/products/lead.jpg'
+    image: 'assets/products/lead.svg'
+  },
+  {
+    id: 'raw-chicken-25',
+    category: 'raw',
+    name: 'Chicken (25% Bone)',
+    description: 'Finely ground premium raw chicken meat and bones. High in essential calcium and healthy fats. Composition: 75% Chicken, 25% Bone. Protein: 16.0%.',
+    price: 1.30,
+    image: 'assets/products/raw-chicken.svg',
+    composition: '75% Chicken, 25% Bone',
+    protein: '16.0%'
+  },
+  {
+    id: 'raw-duck-25',
+    category: 'raw',
+    name: 'Duck (25% Bone)',
+    description: 'Rich, flavorful ground duck. Excellent source of iron and essential amino acids. Composition: 75% Duck, 25% Bone. Protein: 15.2%.',
+    price: 1.30,
+    image: 'assets/products/raw-duck.svg',
+    composition: '75% Duck, 25% Bone',
+    protein: '15.2%'
+  },
+  {
+    id: 'raw-turkey-25',
+    category: 'raw',
+    name: 'Turkey (25% Bone)',
+    description: 'Lean, easily digestible ground turkey meat and bones. Great for sensitive tummies. Composition: 75% Turkey, 25% Bone. Protein: 17.5%.',
+    price: 1.30,
+    image: 'assets/products/raw-turkey.svg',
+    composition: '75% Turkey, 25% Bone',
+    protein: '17.5%'
+  },
+  {
+    id: 'raw-chicken-tripe-25',
+    category: 'raw',
+    name: 'Chicken & Tripe (25% Bone)',
+    description: 'Highly palatable blend of chicken and green tripe. Great for digestion. Composition: 37.5% Chicken, 37.5% Tripe, 25% Bone. Protein: 15.5%.',
+    price: 1.30,
+    image: 'assets/products/raw-chicken-tripe.svg',
+    composition: '37.5% Chicken, 37.5% Tripe, 25% Bone',
+    protein: '15.5%'
+  },
+  {
+    id: 'raw-chicken-beef-25',
+    category: 'raw',
+    name: 'Chicken & Beef (25% Bone)',
+    description: 'A hearty combination of lean beef and chicken meat with bones. Rich in nutrients. Composition: 37.5% Chicken, 37.5% Beef, 25% Bone. Protein: 16.8%.',
+    price: 1.30,
+    image: 'assets/products/raw-chicken-beef.svg',
+    composition: '37.5% Chicken, 37.5% Beef, 25% Bone',
+    protein: '16.8%'
+  },
+  {
+    id: 'raw-chicken-liver-25',
+    category: 'raw',
+    name: 'Chicken & Liver (25% Bone)',
+    description: 'Nutrient-dense raw mix combining chicken and vitamin-rich liver. Composition: 65% Chicken, 10% Liver, 25% Bone. Protein: 16.2%.',
+    price: 1.30,
+    image: 'assets/products/raw-chicken-liver.svg',
+    composition: '65% Chicken, 10% Liver, 25% Bone',
+    protein: '16.2%'
+  },
+  {
+    id: 'raw-duck-tripe-25',
+    category: 'raw',
+    name: 'Duck & Tripe (25% Bone)',
+    description: 'Flavorful duck blended with green tripe to boost gut health and overall vitality. Composition: 37.5% Duck, 37.5% Tripe, 25% Bone. Protein: 14.8%.',
+    price: 1.30,
+    image: 'assets/products/raw-duck-tripe.svg',
+    composition: '37.5% Duck, 37.5% Tripe, 25% Bone',
+    protein: '14.8%'
+  },
+  {
+    id: 'raw-chicken-salmon-25',
+    category: 'raw',
+    name: 'Chicken & Salmon (25% Bone)',
+    description: 'Succulent chicken combined with fresh salmon for a boost in Omega-3 fatty acids. Composition: 50% Chicken, 25% Salmon, 25% Bone. Protein: 16.0%.',
+    price: 1.30,
+    image: 'assets/products/raw-chicken-salmon.svg',
+    composition: '50% Chicken, 25% Salmon, 25% Bone',
+    protein: '16.0%'
+  },
+  {
+    id: 'raw-chicken-complete-801010',
+    category: 'raw',
+    name: 'Chicken Complete (80/10/10)',
+    description: 'Perfectly balanced raw chicken complete meal. Rich in natural amino acids and calcium. Composition: 80% Chicken Meat, 10% Chicken Bone, 10% Offal (5% Liver, 5% Spleen). Protein: 17.0%.',
+    price: 1.60,
+    image: 'assets/products/raw-chicken-complete.svg',
+    composition: '80% Chicken Meat, 10% Chicken Bone, 10% Offal (5% Liver, 5% Spleen)',
+    protein: '17.0%'
+  },
+  {
+    id: 'raw-duck-complete-801010',
+    category: 'raw',
+    name: 'Duck Complete (80/10/10)',
+    description: 'Rich and nutritious ground duck complete meal. Hypoallergenic and highly palatable. Composition: 80% Duck Meat, 10% Duck Bone, 10% Offal (5% Liver, 5% Kidney). Protein: 16.2%.',
+    price: 1.60,
+    image: 'assets/products/raw-duck-complete.svg',
+    composition: '80% Duck Meat, 10% Duck Bone, 10% Offal (5% Liver, 5% Kidney)',
+    protein: '16.2%'
+  },
+  {
+    id: 'raw-chicken-tripe-complete-801010',
+    category: 'raw',
+    name: 'Chicken & Tripe Complete (80/10/10)',
+    description: 'Highly digestible raw chicken and green tripe blend. Fantastic for gut biome health. Composition: 40% Chicken, 40% Tripe, 10% Chicken Bone, 10% Offal. Protein: 15.8%.',
+    price: 1.60,
+    image: 'assets/products/raw-chicken-tripe-complete.svg',
+    composition: '40% Chicken, 40% Tripe, 10% Chicken Bone, 10% Offal',
+    protein: '15.8%'
+  },
+  {
+    id: 'raw-duck-tripe-complete-801010',
+    category: 'raw',
+    name: 'Duck & Tripe Complete (80/10/10)',
+    description: 'Smelly but incredibly healthy blend of duck and tripe. Promotes healthy digestion. Composition: 40% Duck, 40% Tripe, 10% Duck Bone, 10% Offal. Protein: 15.1%.',
+    price: 1.60,
+    image: 'assets/products/raw-duck-tripe-complete.svg',
+    composition: '40% Duck, 40% Tripe, 10% Duck Bone, 10% Offal',
+    protein: '15.1%'
+  },
+  {
+    id: 'raw-beef-complete-801010',
+    category: 'raw',
+    name: 'Beef Complete (80/10/10)',
+    description: 'Premium beef muscle, bone, and organ mix. Superb source of iron and Vitamin B12. Composition: 80% Beef Meat, 10% Beef Bone, 10% Offal (5% Liver, 5% Heart). Protein: 18.2%.',
+    price: 1.60,
+    image: 'assets/products/raw-beef-complete.svg',
+    composition: '80% Beef Meat, 10% Beef Bone, 10% Offal (5% Liver, 5% Heart)',
+    protein: '18.2%'
+  },
+  {
+    id: 'raw-beef-tripe-complete-801010',
+    category: 'raw',
+    name: 'Beef & Tripe Complete (80/10/10)',
+    description: 'Satisfying combination of rich beef and green tripe. Excellent for hard-gaining dogs. Composition: 40% Beef, 40% Tripe, 10% Beef Bone, 10% Offal. Protein: 17.0%.',
+    price: 1.60,
+    image: 'assets/products/raw-beef-tripe-complete.svg',
+    composition: '40% Beef, 40% Tripe, 10% Beef Bone, 10% Offal',
+    protein: '17.0%'
+  },
+  {
+    id: 'raw-lamb-complete-801010',
+    category: 'raw',
+    name: 'Lamb Complete (80/10/10)',
+    description: 'Highly nutritious lamb complete meal. Great for dogs with beef or poultry sensitivities. Composition: 80% Lamb Meat, 10% Lamb Bone, 10% Offal. Protein: 16.5%.',
+    price: 1.60,
+    image: 'assets/products/raw-lamb-complete.svg',
+    composition: '80% Lamb Meat, 10% Lamb Bone, 10% Offal',
+    protein: '16.5%'
+  },
+  {
+    id: 'raw-chicken-salmon-complete-801010',
+    category: 'raw',
+    name: 'Chicken & Salmon Complete (80/10/10)',
+    description: 'Balanced raw chicken blended with premium fresh salmon. High in joint-supporting Omega-3s. Composition: 50% Chicken, 30% Salmon, 10% Chicken Bone, 10% Offal. Protein: 16.8%.',
+    price: 1.60,
+    image: 'assets/products/raw-chicken-salmon-complete.svg',
+    composition: '50% Chicken, 30% Salmon, 10% Chicken Bone, 10% Offal',
+    protein: '16.8%'
+  },
+  {
+    id: 'raw-beef-10',
+    category: 'raw',
+    name: 'Beef (10% Bone)',
+    description: 'Sustainably sourced premium beef with a moderate bone content. Excellent source of iron. Composition: 90% Beef, 10% Bone. Protein: 18.5%.',
+    price: 1.60,
+    image: 'assets/products/raw-beef.svg',
+    composition: '90% Beef, 10% Bone',
+    protein: '18.5%'
+  },
+  {
+    id: 'raw-lamb-10',
+    category: 'raw',
+    name: 'Lamb (10% Bone)',
+    description: 'Succulent and tender lamb with a balanced bone content. Extremely gentle on digestion. Composition: 90% Lamb, 10% Bone. Protein: 17.2%.',
+    price: 1.60,
+    image: 'assets/products/raw-lamb.svg',
+    composition: '90% Lamb, 10% Bone',
+    protein: '17.2%'
+  },
+  {
+    id: 'raw-tripe-boneless',
+    category: 'raw',
+    name: 'Tripe (Boneless)',
+    description: '100% green beef tripe. Pure, unbleached, and packed with digestive enzymes and probiotics. Composition: 100% Green Beef Tripe. Protein: 14.5%.',
+    price: 1.40,
+    image: 'assets/products/raw-tripe.svg',
+    composition: '100% Green Beef Tripe',
+    protein: '14.5%'
+  },
+  {
+    id: 'raw-tripe-fish-boneless',
+    category: 'raw',
+    name: 'Tripe & Oily Fish (Boneless)',
+    description: 'Healthy blend of green tripe and wild-caught oily fish. Great for coat shine and skin health. Composition: 70% Tripe, 30% Oily Fish. Protein: 15.0%.',
+    price: 1.40,
+    image: 'assets/products/raw-tripe-fish.svg',
+    composition: '70% Tripe, 30% Oily Fish',
+    protein: '15.0%'
+  },
+  {
+    id: 'raw-beef-tripe-boneless',
+    category: 'raw',
+    name: 'Beef & Tripe (Boneless)',
+    description: 'Highly nutritious boneless combination of rich beef and green tripe. Ideal for active dogs. Composition: 50% Beef, 50% Tripe. Protein: 16.0%.',
+    price: 1.40,
+    image: 'assets/products/raw-beef-tripe.svg',
+    composition: '50% Beef, 50% Tripe',
+    protein: '16.0%'
+  },
+  {
+    id: 'treat-pigs-ear',
+    category: 'treats',
+    name: 'Pig\'s Ear',
+    description: '100% natural, single-ingredient chewy treat. High in protein and great for satisfying chewing urges. Composition: 100% Pig\'s Ear. Protein: 68.0%.',
+    price: 1.50,
+    image: 'assets/products/treat-pigs-ear.svg',
+    composition: '100% Pig\'s Ear',
+    protein: '68.0%'
+  },
+  {
+    id: 'treat-cows-ear',
+    category: 'treats',
+    name: 'Cow\'s Ear',
+    description: 'A lower-fat alternative to pig\'s ears. Long-lasting, fully digestible, and supports dental hygiene. Composition: 100% Cow\'s Ear. Protein: 74.0%.',
+    price: 2.00,
+    image: 'assets/products/treat-cows-ear.svg',
+    composition: '100% Cow\'s Ear',
+    protein: '74.0%'
+  },
+  {
+    id: 'treat-pizzle',
+    category: 'treats',
+    name: 'Beef Pizzle',
+    description: 'Highly durable, 100% beef chew. Promotes strong jaws and clean teeth. Grain-free and fully digestible. Composition: 100% Beef Pizzle. Protein: 80.0%.',
+    price: 4.00,
+    image: 'assets/products/treat-pizzle.svg',
+    composition: '100% Beef Pizzle',
+    protein: '80.0%'
+  },
+  {
+    id: 'treat-chicken-feet',
+    category: 'treats',
+    name: 'Air-Dried Chicken Feet',
+    description: 'Natural source of glucosamine and chondroitin. Supports joint health and mobility. Composition: 100% Chicken Feet. Protein: 45.0%.',
+    price: 1.20,
+    image: 'assets/products/treat-chicken-feet.svg',
+    composition: '100% Chicken Feet',
+    protein: '45.0%'
+  },
+  {
+    id: 'treat-rabbit-ears',
+    category: 'treats',
+    name: 'Air-Dried Rabbit Ears with Fur',
+    description: 'A fantastic, high-protein treat. The fur acts as a natural de-wormer and cleanses the digestive tract. Composition: 100% Rabbit Ear. Protein: 62.0%.',
+    price: 1.80,
+    image: 'assets/products/treat-rabbit-ears.svg',
+    composition: '100% Rabbit Ear',
+    protein: '62.0%'
+  },
+  {
+    id: 'treat-fish-skins',
+    category: 'treats',
+    name: 'Crunchy Fish Skin Squares',
+    description: '100% white fish skin, air-dried. Highly digestible and packed with Omega-3 and 6 fatty acids for skin health. Composition: 100% Fish Skin. Protein: 78.0%.',
+    price: 2.50,
+    image: 'assets/products/treat-fish-skins.svg',
+    composition: '100% Fish Skin',
+    protein: '78.0%'
+  },
+  {
+    id: 'treat-beef-jerky',
+    category: 'treats',
+    name: 'Premium Beef Jerky Strips',
+    description: 'Rich, savory strips of air-dried beef muscle meat. Easily breakable into smaller training treats. Composition: 100% Beef. Protein: 65.0%.',
+    price: 3.00,
+    image: 'assets/products/treat-beef-jerky.svg',
+    composition: '100% Beef',
+    protein: '65.0%'
+  },
+  {
+    id: 'misc-nopull-harness',
+    category: 'misc',
+    name: 'No-Pull Harness',
+    description: 'Designed to gently discourage pulling by steering your dog from the chest. Comfortable, secure, and fully adjustable.',
+    price: 24.00,
+    image: 'assets/products/harness-nopull.svg'
+  },
+  {
+    id: 'misc-stepin-harness',
+    category: 'misc',
+    name: 'Step-In Harness',
+    description: 'The perfect hassle-free harness. Just step in, buckle up, and go. Lightweight and breathable mesh for ultimate comfort.',
+    price: 18.50,
+    image: 'assets/products/harness-stepin.svg'
+  },
+  {
+    id: 'misc-reflective-harness',
+    category: 'misc',
+    name: 'Reflective Harness',
+    description: 'Features premium 3M reflective threading and panels for safety during early morning or late night walks.',
+    price: 22.00,
+    image: 'assets/products/harness-reflective.svg'
+  },
+  {
+    id: 'misc-adjustable-harness',
+    category: 'misc',
+    name: 'Adjustable Harness',
+    description: 'Multi-point adjustability ensures a tailored fit for any breed. Features front and back lead attachments.',
+    price: 19.50,
+    image: 'assets/products/harness-adjustable.svg'
+  },
+  {
+    id: 'misc-padded-harness',
+    category: 'misc',
+    name: 'Padded Harness',
+    description: 'Lined with soft neoprene padding to prevent chafing on active dogs. Heavy-duty construction for extra security.',
+    price: 26.00,
+    image: 'assets/products/harness-padded.svg'
+  },
+  {
+    id: 'misc-standard-lead',
+    category: 'misc',
+    name: 'Standard Lead',
+    description: 'A durable, everyday 1.5m lead with a padded neoprene handle and secure alloy snap hook.',
+    price: 12.00,
+    image: 'assets/products/lead-standard.svg'
+  },
+  {
+    id: 'misc-training-lead',
+    category: 'misc',
+    name: 'Training Lead',
+    description: 'Double-ended design allows for multiple configurations: short, medium, long, or hands-free waist wear.',
+    price: 16.00,
+    image: 'assets/products/lead-training.svg'
+  },
+  {
+    id: 'misc-long-line',
+    category: 'misc',
+    name: 'Long Line',
+    description: 'Essential tool for safe recall training. Lightweight, robust webbing allows your dog freedom while keeping you in control.',
+    price: 14.50,
+    image: 'assets/products/lead-longline.svg'
+  },
+  {
+    id: 'misc-slip-lead',
+    category: 'misc',
+    name: 'Slip Lead',
+    description: 'All-in-one lead and collar. Made from marine-grade rope with a leather stopper, ideal for quick transitions.',
+    price: 10.50,
+    image: 'assets/products/lead-slip.svg'
+  },
+  {
+    id: 'misc-reflective-lead',
+    category: 'misc',
+    name: 'Reflective Lead',
+    description: 'Dual-sided reflective stitching provides high visibility in low-light conditions. Comfortable foam handle.',
+    price: 14.00,
+    image: 'assets/products/lead-reflective.svg'
+  },
+  {
+    id: 'misc-handsfree-lead',
+    category: 'misc',
+    name: 'Hands-Free Lead',
+    description: 'Features an adjustable waist belt and a shock-absorbing bungee section. Ideal for running, hiking, or hands-free walks.',
+    price: 18.00,
+    image: 'assets/products/lead-handsfree.svg'
   }
 ];
 
