@@ -167,7 +167,7 @@
 .cat-card.raw .cat-icon { background: rgba(166, 71, 42, 0.12); color: var(--rust); }
 .cat-card.treats .cat-icon { background: rgba(201, 144, 46, 0.15); color: var(--ochre); }
 .cat-card.small .cat-icon { background: rgba(110, 138, 99, 0.15); color: var(--sage); }
-.cat-card.misc .cat-icon { background: rgba(31, 58, 46, 0.1); color: var(--pine); }
+.cat-card.misc .cat-icon, .cat-card.walk .cat-icon { background: rgba(31, 58, 46, 0.1); color: var(--pine); }
 
 .cat-card h3 { font-size: 21px; font-weight: 600; }
 .cat-card p { font-size: 14.5px; line-height: 1.55; color: rgba(36, 32, 27, 0.7); margin: 0; flex: 1; }
@@ -181,7 +181,7 @@
 .cat-card.raw .go { color: var(--rust); }
 .cat-card.treats .go { color: var(--ochre); }
 .cat-card.small .go { color: var(--sage); }
-.cat-card.misc .go { color: var(--pine); }
+.cat-card.misc .go, .cat-card.walk .go { color: var(--pine); }
 .cat-card .go svg { width: 13px; height: 13px; transition: transform .18s ease; }
 .cat-card:hover .go svg { transform: translateX(4px); }
 

@@ -69,55 +69,8 @@
 
 <div class="filter-drawer-overlay" id="filter-overlay" onclick="toggleFilterDrawer()"></div>
 
-<main class="wrap" style="padding: 60px 32px;">
-  <div style="margin-bottom: 48px;">
-    <div class="eyebrow" style="color: var(--rust); margin-bottom: 12px;">The Pantry</div>
-    <h1 style="font-size: 48px; margin-bottom: 16px;">Shop Our Staples</h1>
-    <button class="filter-toggle-btn" onclick="toggleFilterDrawer()">
-      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
-      Filters
-    </button>
-  </div>
-
-  <div class="shop-container">
-    <aside class="shop-sidebar" id="filter-sidebar">
-      <button class="close-filters-btn" onclick="toggleFilterDrawer()">Filters <span>&times;</span></button>
-      
-      <div class="filter-group">
-        <label>Category</label>
-        <select id="cat-filter" onchange="updateFilterUI()">
-          <option value="all">All Categories</option>
-          <option value="raw">Raw Food</option>
-          <option value="treats">Treats</option>
-          <option value="small-animals">Small Animals</option>
-          <option value="misc">Accessories</option>
-        </select>
-      </div>
-
-      <div id="dynamic-filters">
-        <!-- Dynamic filters go here -->
-      </div>
-    </aside>
-
-    <div style="flex:1;">
-      <div class="shop-control-bar">
-        <div class="results-count" id="results-count">Showing all products</div>
-        <div class="sort-container">
-          <label>Sort by</label>
-          <select id="sort-select" onchange="applyFiltersAndSort()">
-            <option value="recommended">Recommended</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="name">Alphabetical</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="cat-grid" id="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
-        <!-- Products injected via JS -->
-      </div>
-    </div>
-  </div>
+<main class="wrap" style="padding: 60px 32px;" id="main-content">
+  <!-- Content injected via JS -->
 </main>
 
 <footer>
@@ -141,8 +94,8 @@
       <h4>Shop</h4>
       <a href="shop.html?cat=raw">Raw Food</a>
       <a href="shop.html?cat=treats">Natural Treats</a>
-      <a href="shop.html?cat=small-animals">Small Animals</a>
-      <a href="shop.html?cat=misc">Miscellaneous</a>
+      <a href="shop.html?cat=walk">Walk & Care</a>
+      <a href="shop.html?cat=small-animals">Small Animal</a>
     </div>
     <div class="foot-col">
       <h4>Support</h4>
@@ -170,12 +123,40 @@
     document.getElementById('filter-overlay').classList.toggle('open');
   }
 
-  function renderProducts(items) {
-    const grid = document.getElementById('product-grid');
-    document.getElementById('results-count').textContent = `Showing ${items.length} products`;
-    
-    grid.innerHTML = items.map(p => `
-      <div class="cat-card ${p.category}" style="--tilt: 0deg; cursor: default;">
+  function renderLanding() {
+    document.getElementById('main-content').innerHTML = `
+      <div style="margin-bottom: 64px;">
+        <div class="eyebrow" style="color: var(--rust); margin-bottom: 12px;">The Pantry</div>
+        <h1 style="font-size: 48px; margin-bottom: 16px;">Shop The Waggle Hut</h1>
+        <p>Everything they need, all in one place.</p>
+      </div>
+      <div class="cat-grid">
+        <a href="shop.html?cat=raw" class="cat-card raw">
+            <h3>Raw Food</h3>
+            <p>Raw meals, complete foods and individual raw options.</p>
+        </a>
+        <a href="shop.html?cat=treats" class="cat-card treats">
+            <h3>Natural Treats</h3>
+            <p>Air-dried treats, natural chews and other treats.</p>
+        </a>
+        <a href="shop.html?cat=walk" class="cat-card walk">
+            <h3>Walk & Care</h3>
+            <p>Harnesses, leads, grooming and everyday accessories.</p>
+        </a>
+        <a href="shop.html?cat=small-animals" class="cat-card small">
+            <h3>Small Animal</h3>
+            <p>Hay, food, bedding and small-animal essentials.</p>
+        </a>
+      </div>
+      <div style="margin-top: 48px; text-align: center;">
+        <a href="shop.html?cat=all" class="cta-btn outline">Shop All Products</a>
+      </div>
+    `;
+  }
+
+  function renderProducts(items, title) {
+    const gridHtml = items.map(p => `
+      <div class="cat-card ${p.category}">
         <div class="product-card-img-container">
             <img src="${p.image}" alt="${p.name}" class="product-card-img">
         </div>
@@ -187,17 +168,63 @@
         </div>
       </div>
     `).join('');
+
+    document.getElementById('main-content').innerHTML = `
+      <div style="margin-bottom: 48px;">
+        <div class="eyebrow" style="color: var(--rust); margin-bottom: 12px;">Shop</div>
+        <h1 style="font-size: 48px; margin-bottom: 16px;">${title}</h1>
+        <button class="filter-toggle-btn" onclick="toggleFilterDrawer()">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
+          Filters
+        </button>
+      </div>
+      <div class="shop-container">
+        <aside class="shop-sidebar" id="filter-sidebar">
+          <button class="close-filters-btn" onclick="toggleFilterDrawer()">Filters <span>&times;</span></button>
+          <div class="filter-group">
+            <label>Category</label>
+            <select id="cat-filter" onchange="window.location.assign('shop.html?cat=' + this.value)">
+                <option value="all" ${new URLSearchParams(window.location.search).get('cat') === 'all' ? 'selected' : ''}>All</option>
+                <option value="raw" ${new URLSearchParams(window.location.search).get('cat') === 'raw' ? 'selected' : ''}>Raw Food</option>
+                <option value="treats" ${new URLSearchParams(window.location.search).get('cat') === 'treats' ? 'selected' : ''}>Natural Treats</option>
+                <option value="walk" ${new URLSearchParams(window.location.search).get('cat') === 'walk' ? 'selected' : ''}>Walk & Care</option>
+                <option value="small-animals" ${new URLSearchParams(window.location.search).get('cat') === 'small-animals' ? 'selected' : ''}>Small Animal</option>
+            </select>
+          </div>
+          <div id="dynamic-filters"></div>
+        </aside>
+        <div style="flex:1;">
+          <div class="shop-control-bar">
+            <div class="results-count" id="results-count">Showing ${items.length} products</div>
+            <div class="sort-container">
+              <label>Sort by</label>
+              <select id="sort-select" onchange="applyFiltersAndSort()">
+                <option value="recommended">Recommended</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name">Alphabetical</option>
+              </select>
+            </div>
+          </div>
+          <div class="cat-grid" id="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
+            ${gridHtml}
+          </div>
+        </div>
+      </div>
+    `;
+    updateFilterUI();
   }
 
   function updateFilterUI() {
-    const cat = document.getElementById('cat-filter').value;
+    const cat = new URLSearchParams(window.location.search).get('cat');
     const container = document.getElementById('dynamic-filters');
-    
+    if (!container) return;
+
     let html = '';
     if (cat === 'raw') {
         html = `
             <div class="filter-group">
-                <label>Meat Type</label>
+                <label>Meat Protein</label>
                 <select id="sub-filter" onchange="applyFiltersAndSort()">
                     <option value="all">All</option>
                     <option value="beef">Beef</option>
@@ -219,43 +246,51 @@
                 </select>
             </div>
         `;
-    } else if (cat === 'misc') {
+    } else if (cat === 'walk') {
         html = `
             <div class="filter-group">
-                <label>Accessory Type</label>
+                <label>Product Type</label>
                 <select id="sub-filter" onchange="applyFiltersAndSort()">
                     <option value="all">All</option>
-                    <option value="harness">Harness</option>
-                    <option value="lead">Lead</option>
+                    <option value="harnesses">Harnesses</option>
+                    <option value="leads">Leads</option>
+                    <option value="feeding">Feeding</option>
+                </select>
+            </div>
+        `;
+    } else if (cat === 'treats') {
+        html = `
+            <div class="filter-group">
+                <label>Treat Type</label>
+                <select id="sub-filter" onchange="applyFiltersAndSort()">
+                    <option value="all">All</option>
+                    <option value="ears">Ears</option>
+                    <option value="pizzles">Pizzles</option>
+                    <option value="chews">Natural Chews</option>
                 </select>
             </div>
         `;
     }
     
     container.innerHTML = html;
-    applyFiltersAndSort();
   }
 
   function applyFiltersAndSort() {
-    const cat = document.getElementById('cat-filter').value;
+    const cat = new URLSearchParams(window.location.search).get('cat');
     const subFilter = document.getElementById('sub-filter') ? document.getElementById('sub-filter').value : 'all';
     const compFilter = document.getElementById('comp-filter') ? document.getElementById('comp-filter').value : 'all';
     const sort = document.getElementById('sort-select').value;
     
     let filtered = [...products];
 
-    if (cat !== 'all') filtered = filtered.filter(p => p.category === cat);
+    if (cat && cat !== 'all') filtered = filtered.filter(p => p.category === cat);
     
     if (subFilter !== 'all') {
-        if(cat === 'misc') {
-            filtered = filtered.filter(p => p.name.toLowerCase().includes(subFilter));
-        } else {
-            filtered = filtered.filter(p => p.name.toLowerCase().includes(subFilter));
-        }
+        filtered = filtered.filter(p => p.subcategory && p.subcategory.toLowerCase().includes(subFilter));
     }
     
     if (compFilter !== 'all') {
-        if (compFilter === 'Boneless') filtered = filtered.filter(p => p.name.toLowerCase().includes('boneless'));
+        if (compFilter === 'Boneless') filtered = filtered.filter(p => p.composition && p.composition.toLowerCase().includes('boneless'));
         else filtered = filtered.filter(p => p.composition && p.composition.includes(compFilter));
     }
     
@@ -264,22 +299,34 @@
     else if (sort === 'price-high') filtered.sort((a,b) => b.price - a.price);
     else if (sort === 'name') filtered.sort((a,b) => a.name.localeCompare(b.name));
     
-    renderProducts(filtered);
+    const grid = document.getElementById('product-grid');
+    document.getElementById('results-count').textContent = `Showing ${filtered.length} products`;
+    grid.innerHTML = filtered.map(p => `
+      <div class="cat-card ${p.category}">
+        <div class="product-card-img-container">
+            <img src="${p.image}" alt="${p.name}" class="product-card-img">
+        </div>
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <div style="margin-top:auto;">
+          <p style="font-family:'IBM Plex Mono', monospace; font-weight:700; color:var(--ink); margin-bottom:12px;">£${p.price.toFixed(2)}</p>
+          <button class="cta-btn" style="width:100%;" onclick="addToCart('${p.id}')">Add to Cart</button>
+        </div>
+      </div>
+    `).join('');
   }
 
   // Initial render
   const urlParams = new URLSearchParams(window.location.search);
-  const catParam = urlParams.get('cat');
-  if (catParam) {
-      document.getElementById('cat-filter').value = catParam;
+  const cat = urlParams.get('cat');
+  if (cat && cat !== 'all') {
+      const titles = { 'raw': 'Raw Food', 'treats': 'Natural Treats', 'walk': 'Walk & Care', 'small-animals': 'Small Animal' };
+      applyFiltersAndSort();
+      renderProducts(products.filter(p => p.category === cat), titles[cat] || 'Shop');
+  } else {
+      renderLanding();
   }
-  updateFilterUI();
 </script>
 
 </body>
 </html>
-
-
-
-
-
