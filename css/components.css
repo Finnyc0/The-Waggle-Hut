@@ -523,3 +523,62 @@
 .cat-card:hover .product-card-img {
   transform: scale(1.05);
 }
+
+/* Product Detail Modal */
+.product-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 39, 32, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+.product-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.product-modal {
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  max-width: 680px;
+  width: 100%;
+  padding: 36px;
+  position: relative;
+  box-shadow: 10px 10px 0 var(--ink);
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform .25s cubic-bezier(.2, .8, .3, 1);
+}
+
+.product-modal-overlay.open .product-modal {
+  transform: translateY(0);
+}
+
+.product-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--ink);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--ink);
+  background: var(--cream);
+}

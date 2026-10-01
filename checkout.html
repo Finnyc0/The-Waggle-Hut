@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout — The Waggle Hut</title>
+  <meta name="description" content="Secure checkout for your raw pet food and natural treats order at The Waggle Hut.">
+  <meta property="og:title" content="Checkout — The Waggle Hut">
+  <meta property="og:description" content="Secure checkout for your raw pet food and natural treats order.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
@@ -19,32 +23,88 @@
 </header>
 
 <main class="wrap" style="padding: 60px 32px;">
-  <h1>Checkout</h1>
-  <div style="background: var(--cream-2); padding: 20px; border-radius: 6px; border: 1.5px solid var(--ink); margin-bottom: 40px;">
-    <strong>Note:</strong> This is a demonstration placeholder and does not process real payments.
+  <div style="margin-bottom: 30px;">
+    <div class="eyebrow" style="color: var(--rust); margin-bottom: 8px;">Secure Checkout</div>
+    <h1 style="font-size: 42px;">Complete Your Order</h1>
+  </div>
+
+  <div style="background: var(--cream-2); padding: 18px 24px; border-radius: 6px; border: 1.5px solid var(--ink); margin-bottom: 40px;">
+    <strong>Demo Notice:</strong> This is a simulation checkout. No real payments will be charged.
   </div>
   
-  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;">
-    <form onsubmit="event.preventDefault(); alert('Order placed! (Demo Only)'); window.location.href='index.html';">
-      <h2>Customer Information</h2>
-      <input type="text" placeholder="Full Name" required style="width:100%; padding:12px; margin-bottom:10px; border:1px solid var(--ink);">
-      <input type="email" placeholder="Email" required style="width:100%; padding:12px; margin-bottom:10px; border:1px solid var(--ink);">
-      <h2>Delivery Address</h2>
-      <input type="text" placeholder="Address" required style="width:100%; padding:12px; margin-bottom:10px; border:1px solid var(--ink);">
-      <input type="text" placeholder="Postcode" required style="width:100%; padding:12px; margin-bottom:20px; border:1px solid var(--ink);">
-      
-      <h3>Payment (Demo Only)</h3>
-      <div style="border: 1px solid var(--ink); padding: 20px;">
-        <p>This is a simulated payment gateway. No real card details are required.</p>
+  <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start;">
+    <form onsubmit="event.preventDefault(); alert('Order successfully placed! Thank you for shopping with The Waggle Hut.'); localStorage.removeItem('waggleCart'); window.location.href='index.html';">
+      <h2 style="font-size: 22px; margin-bottom: 16px;">1. Choose Fulfillment Method</h2>
+      <div style="margin-bottom: 24px; display: flex; gap: 12px;">
+        <label style="flex:1; border: 1.5px solid var(--ink); padding: 16px; border-radius: 6px; cursor: pointer; background: white; display: flex; align-items: center; gap: 12px;">
+          <input type="radio" name="fulfillment" value="delivery" checked onchange="updateFulfillmentMode()">
+          <div>
+            <strong>Home Delivery</strong>
+            <p style="font-size: 13px; color: rgba(36,32,27,0.7); margin: 2px 0 0;">Shipped fresh via 24h courier</p>
+          </div>
+        </label>
+        <label style="flex:1; border: 1.5px solid var(--ink); padding: 16px; border-radius: 6px; cursor: pointer; background: white; display: flex; align-items: center; gap: 12px;">
+          <input type="radio" name="fulfillment" value="collect" onchange="updateFulfillmentMode()">
+          <div>
+            <strong>Click & Collect</strong>
+            <p style="font-size: 13px; color: rgba(36,32,27,0.7); margin: 2px 0 0;">Ready in 2h at Wath Store</p>
+          </div>
+        </label>
       </div>
-      <button type="submit" class="cta-btn" style="width:100%; margin-top:20px;">Place Order</button>
+
+      <h2 style="font-size: 22px; margin-bottom: 16px;">2. Customer Information</h2>
+      <div style="margin-bottom: 16px;">
+        <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">Full Name</label>
+        <input type="text" placeholder="e.g. Jane Doe" required style="width:100%; padding:12px; border:1.5px solid var(--ink); border-radius: 4px; font-family: inherit;">
+      </div>
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">Email Address</label>
+        <input type="email" placeholder="e.g. jane@example.com" required style="width:100%; padding:12px; border:1.5px solid var(--ink); border-radius: 4px; font-family: inherit;">
+      </div>
+
+      <div id="delivery-address-section">
+        <h2 style="font-size: 22px; margin-bottom: 16px;">3. Delivery Address</h2>
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">Street Address</label>
+          <input type="text" id="street-input" placeholder="e.g. 123 Bark Lane" required style="width:100%; padding:12px; border:1.5px solid var(--ink); border-radius: 4px; font-family: inherit;">
+        </div>
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">Postcode</label>
+          <input type="text" id="postcode-input" placeholder="e.g. S65 1AA" required style="width:100%; padding:12px; border:1.5px solid var(--ink); border-radius: 4px; font-family: inherit;">
+        </div>
+      </div>
+
+      <div id="collect-location-section" style="display: none; margin-bottom: 24px; background: var(--cream-2); border: 1.5px solid var(--ink); padding: 20px; border-radius: 6px;">
+        <h3 style="font-size: 18px; margin-bottom: 8px;">Pickup Location</h3>
+        <p style="font-size: 14px; line-height: 1.5; color: rgba(36,32,27,0.8); margin: 0;">
+          <strong>Wath Pet Hub Store</strong><br>
+          123 High Street, Wath-upon-Dearne, Rotherham, S65 1AA<br>
+          <em>Opening Hours: Mon-Sat, 9:00 AM – 5:30 PM</em>
+        </p>
+      </div>
+      
+      <h2 style="font-size: 22px; margin-bottom: 16px;">Payment Method</h2>
+      <div style="border: 1.5px solid var(--ink); padding: 20px; border-radius: 6px; background: white; margin-bottom: 24px;">
+        <p style="font-size: 14px; color: rgba(36,32,27,0.7);">Simulated Secure Card Payment (Demo Mode). No real card details required.</p>
+      </div>
+
+      <button type="submit" class="cta-btn" style="width:100%; padding: 18px; font-size: 16px; background: var(--pine);">Place Order</button>
     </form>
     
-    <div style="background: var(--cream); padding: 30px; border: 1px solid var(--ink);">
-      <h2>Order Summary</h2>
-      <div id="checkout-summary"></div>
-      <hr>
-      <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2em;">
+    <div style="background: white; padding: 30px; border: 1.5px solid var(--ink); border-radius: 6px; box-shadow: 4px 4px 0 var(--ink);">
+      <h2 style="font-size: 22px; margin-bottom: 20px;">Order Summary</h2>
+      <div id="checkout-summary" style="margin-bottom: 20px;"></div>
+      <hr style="border: none; border-top: 1px solid var(--line); margin-bottom: 16px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14.5px;">
+        <span>Subtotal</span>
+        <span id="checkout-subtotal">£0.00</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 14.5px;" id="shipping-row">
+        <span>Shipping</span>
+        <span id="checkout-shipping">£3.99</span>
+      </div>
+      <hr style="border: none; border-top: 1.5px solid var(--ink); margin-bottom: 16px;">
+      <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.25em;">
         <span>Total</span>
         <span id="checkout-total">£0.00</span>
       </div>
@@ -55,22 +115,69 @@
 <script src="js/products.js"></script>
 <script>
   const cart = JSON.parse(localStorage.getItem('waggleCart')) || [];
+  let fulfillment = localStorage.getItem('waggleFulfillment') || 'delivery';
+
+  // Set radio button state based on stored fulfillment
+  document.querySelectorAll('input[name="fulfillment"]').forEach(radio => {
+    if (radio.value === fulfillment) radio.checked = true;
+  });
+
+  function updateFulfillmentMode() {
+    const selected = document.querySelector('input[name="fulfillment"]:checked').value;
+    fulfillment = selected;
+    localStorage.setItem('waggleFulfillment', selected);
+
+    const addressSection = document.getElementById('delivery-address-section');
+    const collectSection = document.getElementById('collect-location-section');
+    const streetInput = document.getElementById('street-input');
+    const postcodeInput = document.getElementById('postcode-input');
+    const shippingRow = document.getElementById('shipping-row');
+
+    if (selected === 'collect') {
+      addressSection.style.display = 'none';
+      collectSection.style.display = 'block';
+      streetInput.removeAttribute('required');
+      postcodeInput.removeAttribute('required');
+      shippingRow.style.display = 'none';
+    } else {
+      addressSection.style.display = 'block';
+      collectSection.style.display = 'none';
+      streetInput.setAttribute('required', 'true');
+      postcodeInput.setAttribute('required', 'true');
+      shippingRow.style.display = 'flex';
+    }
+    recalculateTotals();
+  }
+
   const summary = document.getElementById('checkout-summary');
+  const subtotalDisplay = document.getElementById('checkout-subtotal');
+  const shippingDisplay = document.getElementById('checkout-shipping');
   const totalDisplay = document.getElementById('checkout-total');
-  
-  let totalCost = 0;
-  summary.innerHTML = cart.map(item => {
-    totalCost += item.price * item.quantity;
-    return `<div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-              <span>${item.quantity} x ${item.name}</span>
-              <span>£${(item.price * item.quantity).toFixed(2)}</span>
-            </div>`;
-  }).join('');
-  
-  totalDisplay.textContent = '£' + totalCost.toFixed(2);
+
+  function recalculateTotals() {
+    let subtotal = 0;
+    if (cart.length === 0) {
+      summary.innerHTML = '<p style="color: rgba(36,32,27,0.5);">Your basket is empty.</p>';
+    } else {
+      summary.innerHTML = cart.map(item => {
+        subtotal += item.price * item.quantity;
+        return `<div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size: 14px;">
+                  <span>${item.quantity} x ${item.name}</span>
+                  <span style="font-family:'IBM Plex Mono', monospace; font-weight:600;">£${(item.price * item.quantity).toFixed(2)}</span>
+                </div>`;
+      }).join('');
+    }
+
+    const shipping = fulfillment === 'collect' ? 0 : (subtotal >= 30 || subtotal === 0 ? 0 : 3.99);
+    const finalTotal = subtotal + shipping;
+
+    subtotalDisplay.textContent = '£' + subtotal.toFixed(2);
+    shippingDisplay.textContent = shipping === 0 ? 'FREE' : '£' + shipping.toFixed(2);
+    totalDisplay.textContent = '£' + finalTotal.toFixed(2);
+  }
+
+  // Initial call
+  updateFulfillmentMode();
 </script>
 </body>
 </html>
-
-
-

@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Raw Feeding Calculator — The Waggle Hut</title>
+  <meta name="description" content="Calculate your dog's daily and weekly raw food portions accurately with The Waggle Hut Raw Feeding Calculator.">
+  <meta property="og:title" content="Raw Feeding Calculator — The Waggle Hut">
+  <meta property="og:description" content="Calculate your dog's daily and weekly raw food portions accurately.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
@@ -137,7 +141,7 @@
     <div class="foot-col">
       <h4>Support</h4>
       <a href="contact.html">Shipping &amp; Returns</a>
-      <a href="feeding.html\">Feeding Guide</a>
+      <a href="feeding.html">Feeding Guide</a>
       <a href="contact.html">Contact Us</a>
     </div>
     <div class="foot-col">
@@ -174,6 +178,29 @@
     resPerc.textContent = (agePerc * 100).toFixed(1) + '%';
     resDaily.textContent = dailyGrams >= 1000 ? (dailyGrams/1000).toFixed(2) + 'kg' : Math.round(dailyGrams) + 'g';
     resWeekly.textContent = weeklyGrams >= 1000 ? (weeklyGrams/1000).toFixed(2) + 'kg' : Math.round(weeklyGrams) + 'g';
+    
+    // Render recommendations
+    const rawProducts = products.filter(p => p.category === 'raw').slice(0, 3);
+    let recContainer = document.getElementById('calc-recommendations');
+    if (!recContainer) {
+      recContainer = document.createElement('div');
+      recContainer.id = 'calc-recommendations';
+      recContainer.style.marginTop = '30px';
+      resultDiv.appendChild(recContainer);
+    }
+    recContainer.innerHTML = `
+      <h3 style="font-size: 20px; margin-bottom: 16px;">Recommended Raw Food for Your Pet</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        ${rawProducts.map(p => `
+          <div style="background: white; border: 1.5px solid var(--ink); border-radius: 6px; padding: 16px; display: flex; flex-direction: column;">
+            <img src="${p.image}" alt="${p.name}" style="height: 100px; object-fit: contain; margin-bottom: 10px;">
+            <h4 style="font-size: 15px; margin-bottom: 6px;">${p.name}</h4>
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 10px;">£${p.price.toFixed(2)}</p>
+            <button class="cta-btn" style="margin-top: auto; padding: 10px; font-size: 12px; background: var(--pine);" onclick="addToCart('${p.id}')">Add to Basket</button>
+          </div>
+        `).join('')}
+      </div>
+    `;
     
     resultDiv.style.display = 'block';
     

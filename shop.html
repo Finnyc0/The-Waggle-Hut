@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop — The Waggle Hut</title>
+  <meta name="description" content="Shop fresh raw food, natural air-dried treats, walk & care essentials, and small animal supplies at The Waggle Hut.">
+  <meta property="og:title" content="Shop — The Waggle Hut">
+  <meta property="og:description" content="Shop fresh raw food, natural air-dried treats, walk & care essentials, and small animal supplies.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
@@ -180,7 +184,7 @@
         </div>
         <div class="cat-grid" id="bestsellers-grid" style="grid-template-columns: repeat(4, 1fr);">
           ${products.slice(0, 4).map(p => `
-            <div class="cat-card ${p.category}">
+            <div class="cat-card ${p.category}" onclick="openProductModal('${p.id}')" style="cursor:pointer;" title="Click for details">
               <div style="background: var(--cream-2); border-radius: 4px; padding: 12px; margin-bottom: 8px; height: 140px; display: flex; align-items: center; justify-content: center;">
                   <img src="${p.image}" alt="${p.name}" style="max-height: 110px; max-width: 100%; object-fit: contain;">
               </div>
@@ -188,7 +192,7 @@
               <p style="font-size: 13.5px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${p.description}</p>
               <div style="margin-top:auto;">
                 <p style="font-family:'IBM Plex Mono', monospace; font-weight:700; color:var(--ink); margin-bottom:12px;">£${p.price.toFixed(2)}</p>
-                <button class="cta-btn" style="width:100%; background: var(--pine);" onclick="addToCart('${p.id}')">Add to Basket</button>
+                <button class="cta-btn" style="width:100%; background: var(--pine);" onclick="event.stopPropagation(); addToCart('${p.id}')">Add to Basket</button>
               </div>
             </div>
           `).join('')}
@@ -199,7 +203,7 @@
 
   function renderProducts(items, title) {
     const gridHtml = items.map(p => `
-      <div class="cat-card ${p.category}">
+      <div class="cat-card ${p.category}" onclick="openProductModal('${p.id}')" style="cursor:pointer;" title="Click for details">
         <div class="product-card-img-container">
             <img src="${p.image}" alt="${p.name}" class="product-card-img">
         </div>
@@ -207,7 +211,7 @@
         <p>${p.description}</p>
         <div style="margin-top:auto;">
           <p style="font-family:'IBM Plex Mono', monospace; font-weight:700; color:var(--ink); margin-bottom:12px;">£${p.price.toFixed(2)}</p>
-          <button class="cta-btn" style="width:100%; background: var(--pine);" onclick="addToCart('${p.id}')">Add to Basket</button>
+          <button class="cta-btn" style="width:100%; background: var(--pine);" onclick="event.stopPropagation(); addToCart('${p.id}')">Add to Basket</button>
         </div>
       </div>
     `).join('');
@@ -391,7 +395,7 @@
         `;
       } else {
         grid.innerHTML = filtered.map(p => `
-          <div class="cat-card ${p.category}">
+          <div class="cat-card ${p.category}" onclick="openProductModal('${p.id}')" style="cursor:pointer;" title="Click for details">
             <div class="product-card-img-container">
                 <img src="${p.image}" alt="${p.name}" class="product-card-img">
             </div>
@@ -399,7 +403,7 @@
             <p>${p.description}</p>
             <div style="margin-top:auto;">
               <p style="font-family:'IBM Plex Mono', monospace; font-weight:700; color:var(--ink); margin-bottom:12px;">£${p.price.toFixed(2)}</p>
-              <button class="cta-btn" style="width:100%; background: var(--pine);" onclick="addToCart('${p.id}')">Add to Basket</button>
+              <button class="cta-btn" style="width:100%; background: var(--pine);" onclick="event.stopPropagation(); addToCart('${p.id}')">Add to Basket</button>
             </div>
           </div>
         `).join('');
@@ -427,6 +431,43 @@
     applyFiltersAndSort();
   }
 
+  function openProductModal(productId) {
+    const p = products.find(prod => prod.id === productId);
+    if (!p) return;
+    const modalContent = document.getElementById('product-modal-content');
+    modalContent.innerHTML = `
+      <button class="product-modal-close" onclick="closeProductModalDirect()">&times;</button>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;">
+        <div style="background: var(--cream-2); border-radius: 6px; padding: 16px; border: 1.5px solid var(--ink); height: 240px; display: flex; align-items: center; justify-content: center;">
+          <img src="${p.image}" alt="${p.name}" style="max-height: 200px; max-width: 100%; object-fit: contain;">
+        </div>
+        <div>
+          <div class="eyebrow" style="color: var(--rust); margin-bottom: 6px; text-transform: uppercase;">${p.category} ${p.subcategory ? '— ' + p.subcategory : ''}</div>
+          <h2 style="font-size: 26px; margin-bottom: 10px;">${p.name}</h2>
+          <p style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 16px;">£${p.price.toFixed(2)}</p>
+          <p style="font-size: 14.5px; line-height: 1.6; color: rgba(36,32,27,0.75); margin-bottom: 20px;">${p.description}</p>
+          
+          ${p.composition ? `<div style="margin-bottom: 12px; font-size: 13.5px;"><strong>Composition:</strong> ${p.composition}</div>` : ''}
+          ${p.analyticalProtein ? `<div style="margin-bottom: 16px; font-size: 13.5px;"><strong>Analytical Protein:</strong> ${p.analyticalProtein}</div>` : ''}
+          ${p.animal ? `<div style="margin-bottom: 16px; font-size: 13.5px;"><strong>Suitable For:</strong> ${p.animal}</div>` : ''}
+          
+          <button class="cta-btn" style="width: 100%; padding: 16px; background: var(--pine);" onclick="addToCart('${p.id}'); closeProductModalDirect();">Add to Basket</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('product-modal-overlay').classList.add('open');
+  }
+
+  function closeProductModalDirect() {
+    document.getElementById('product-modal-overlay').classList.remove('open');
+  }
+
+  function closeProductModal(e) {
+    if (e.target.id === 'product-modal-overlay') {
+      closeProductModalDirect();
+    }
+  }
+
   // Initial render
   const urlParams = new URLSearchParams(window.location.search);
   const cat = urlParams.get('cat');
@@ -439,6 +480,10 @@
       renderLanding();
   }
 </script>
+
+<div class="product-modal-overlay" id="product-modal-overlay" onclick="closeProductModal(event)">
+  <div class="product-modal" id="product-modal-content"></div>
+</div>
 
 </body>
 </html>

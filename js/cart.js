@@ -1,9 +1,16 @@
 let cart = JSON.parse(localStorage.getItem('waggleCart')) || [];
+let currentFulfillment = localStorage.getItem('waggleFulfillment') || 'delivery';
 
 function saveCart() {
   localStorage.setItem('waggleCart', JSON.stringify(cart));
   renderCart();
   updateCartBadge();
+}
+
+function setFulfillment(type) {
+  currentFulfillment = type;
+  localStorage.setItem('waggleFulfillment', type);
+  renderCart();
 }
 
 function addToCart(productId) {
@@ -54,8 +61,21 @@ function renderCart() {
 
   if (cart.length === 0) {
     container.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
-    document.querySelector('.cart-total span:last-child').textContent = '£0.00';
-    document.getElementById('cart-total-items').textContent = '0 items';
+    const totalEl = document.querySelector('.cart-total span:last-child');
+    if (totalEl) totalEl.textContent = '£0.00';
+    const countEl = document.getElementById('cart-total-items');
+    if (countEl) countEl.textContent = '0 items';
+    const footer = document.querySelector('.cart-footer');
+    if (footer) {
+      footer.innerHTML = `
+        <div style="margin-bottom: 16px; display: flex; gap: 8px; background: var(--cream); padding: 4px; border: 1.5px solid var(--ink); border-radius: 4px;">
+          <button onclick="setFulfillment('delivery')" style="flex:1; padding: 8px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; font-weight: 700; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; background: ${currentFulfillment === 'delivery' ? 'var(--pine)' : 'transparent'}; color: ${currentFulfillment === 'delivery' ? 'var(--cream)' : 'var(--ink)'};">Delivery</button>
+          <button onclick="setFulfillment('collect')" style="flex:1; padding: 8px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; font-weight: 700; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; background: ${currentFulfillment === 'collect' ? 'var(--pine)' : 'transparent'}; color: ${currentFulfillment === 'collect' ? 'var(--cream)' : 'var(--ink)'};">Click & Collect</button>
+        </div>
+        <div class="cart-total"><span>Subtotal</span><span>£0.00</span></div>
+        <button class="cta-btn checkout-btn" onclick="window.location.assign('checkout.html')">Proceed to Checkout</button>
+      `;
+    }
     return;
   }
 
@@ -78,8 +98,26 @@ function renderCart() {
     </div>
   `).join('');
 
-  document.getElementById('cart-total-items').textContent = `${totalItems} item${totalItems === 1 ? '' : 's'}`;
-  document.querySelector('.cart-total span:last-child').textContent = `£${totalCost.toFixed(2)}`;
+  const countEl = document.getElementById('cart-total-items');
+  if (countEl) countEl.textContent = `${totalItems} item${totalItems === 1 ? '' : 's'}`;
+
+  const footer = document.querySelector('.cart-footer');
+  if (footer) {
+    const shipping = currentFulfillment === 'collect' ? 0 : (totalCost >= 30 || totalCost === 0 ? 0 : 3.99);
+    const finalTotal = totalCost + shipping;
+
+    footer.innerHTML = `
+      <div style="margin-bottom: 16px; display: flex; gap: 8px; background: var(--cream); padding: 4px; border: 1.5px solid var(--ink); border-radius: 4px;">
+        <button onclick="setFulfillment('delivery')" style="flex:1; padding: 8px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; font-weight: 700; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; background: ${currentFulfillment === 'delivery' ? 'var(--pine)' : 'transparent'}; color: ${currentFulfillment === 'delivery' ? 'var(--cream)' : 'var(--ink)'};">Delivery</button>
+        <button onclick="setFulfillment('collect')" style="flex:1; padding: 8px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; font-weight: 700; text-transform: uppercase; border: none; border-radius: 2px; cursor: pointer; background: ${currentFulfillment === 'collect' ? 'var(--pine)' : 'transparent'}; color: ${currentFulfillment === 'collect' ? 'var(--cream)' : 'var(--ink)'};">Click & Collect</button>
+      </div>
+      <div style="font-size: 12px; color: rgba(36,32,27,0.7); margin-bottom: 12px;">
+        ${currentFulfillment === 'collect' ? '📍 Pickup at: Wath Pet Hub Store, S65 1AA (Ready in 2h)' : (shipping === 0 ? '✨ Free Shipping applied!' : '🚚 Delivery: £3.99 (Free over £30)')}
+      </div>
+      <div class="cart-total"><span>Total</span><span>£${finalTotal.toFixed(2)}</span></div>
+      <button class="cta-btn checkout-btn" onclick="window.location.assign('checkout.html')">Proceed to Checkout</button>
+    `;
+  }
 }
 
 function updateCartBadge() {
